@@ -1,0 +1,38 @@
+# version: "3.9"
+
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "5000:5000"
+
+#   frontend:
+#     build: ./frontend
+#     ports:
+#       - "3000:80"
+
+version: "3.9"
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/app 
+    depends_on:
+      - backend
