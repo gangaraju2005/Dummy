@@ -2,17 +2,16 @@ name: Ada(GNAT)
 
 on:
   push:
-    branches:[main]
-join:
+    branches: [main]
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -name: Checkout
-      uses: actions/checkout@v2
-      -name: Set up GNAT toolchain
-
-      runs: >
-        sudo apt-get update &&
-        sudo apt-get install -y gnat
-      -name: Build
-      run: gprbuild -j0 -p
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up GNAT toolchain
+        run: >
+          sudo apt-get update &&
+          sudo apt-get install -y gnat
+      - name: Build
+        run: gprbuild -j0 -p
